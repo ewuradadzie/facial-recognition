@@ -12,8 +12,6 @@ async function startVideo() {
     stream => video.srcObject = stream,
     err => console.error(err)
   )
-
-  
 }
 
 video.addEventListener('play', async () => {
@@ -24,7 +22,6 @@ video.addEventListener('play', async () => {
 
   const labeledFaceDescriptors = await loadLabeledImages()
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
-  console.log('Loaded')
   
   canvas = faceapi.createCanvasFromMedia(video)
   container.append(canvas)
@@ -49,11 +46,10 @@ function loadLabeledImages() {
     labels.map(async label => {
       const descriptions = []
       for (let i = 1; i <= 2; i++) {
-        const img = await faceapi.fetchImage(`https://raw.githubusercontent.com/ewuradadzie/live-face-recognition/master/labeled_images/${label}/${i}.jpg`)
+        const img = await faceapi.fetchImage(`https://raw.githubusercontent.com/ewuradadzie/live-face-recognition/master/image-database/${label}/${i}.jpg`)
         const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
         descriptions.push(detections.descriptor)
       }
-
       return new faceapi.LabeledFaceDescriptors(label, descriptions)
     })
   )
