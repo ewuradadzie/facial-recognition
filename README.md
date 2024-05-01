@@ -1,4 +1,4 @@
-# Live Facial Recognition
+# Facial Recognition
 
 A little script to match live video with pre-uploaded images of known people.
 In effect, it checks the identity of who is being seen through the camera against pre-identified people.
